@@ -218,6 +218,10 @@ kng_rc)
 	set_usb_led "$board:green:usb"
 	set_wifi_led "$board:green:wifi"
 	;;
+ledev7620)
+	ucidef_set_led_default "sys" "sys" "mt7620a:red:sys" "1"
+	ucidef_set_led_netdev "wan" "wan" "mt7620a:red:wan" "eth0.2"
+	;;
 m2m)
 	set_wifi_led "$board:blue:wifi"
 	ucidef_set_led_netdev "eth" "Ethernet" "$board:green:wan" "eth0"

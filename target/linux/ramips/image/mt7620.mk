@@ -485,3 +485,11 @@ define Device/d240
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mt76 kmod-sdhci-mt7620
 endef
 TARGET_DEVICES += d240
+
+define Device/ledev7620
+  DTS := LEDEV7620
+  IMAGE_SIZE := $(ralink_default_fw_size_16M)
+  DEVICE_TITLE := LOONGSKY LEDEV7620
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci kmod-sdhci-mt7620 kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += ledev7620

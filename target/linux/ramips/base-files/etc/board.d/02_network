@@ -226,6 +226,11 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch1" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "7t@eth0"
 		;;
+	ledev7620)
+		ucidef_set_interfaces_lan_wan "eth0.1" "eth0.2"
+		ucidef_add_switch "switch0" \
+			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6t@eth0"
+		;;
 	mlwg2|\
 	wizard8800|\
 	wl-330n)
@@ -362,6 +367,17 @@ ramips_setup_macs()
 	linkits7688d)
 		wan_mac=$(mtd_get_mac_binary factory 4)
 		lan_mac=$(mtd_get_mac_binary factory 46)
+		;;
+	ledev7620)
+		local tmpmac
+		[ -f /tmp/macid ] && tmpmac=$(cat /tmp/macid)
+		[ -z "$tmpmac" ] && \
+			r1=$(dd if=/dev/urandom bs=1 count=1 | hexdump -e '1/1 "%02x"') && \
+			r2=$(dd if=/dev/urandom bs=1 count=1 | hexdump -e '1/1 "%02x"') && \
+			r3=$(dd if=/dev/urandom bs=1 count=1 | hexdump -e '1/1 "%02x"') && \
+			tmpmac=00:0c:43:$r1:$r2:$r3 && echo "$tmpmac" > /tmp/macid
+		wan_mac=${tmpmac}
+		lan_mac=$(macaddr_add "$wan_mac" -1)
 		;;
 	mac1200rv2)
 		lan_mac=$(mtd_get_mac_binary factory_info 13)

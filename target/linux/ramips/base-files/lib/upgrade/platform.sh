@@ -76,6 +76,7 @@ platform_check_image() {
 	kng_rc|\
 	linkits7688|\
 	linkits7688d|\
+	ledev7620|\
 	m2m|\
 	m3|\
 	m4|\
