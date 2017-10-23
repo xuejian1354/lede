@@ -1,0 +1,4 @@
+config  PACKAGE_gin-gonic
+	bool "gin (a HTTP web framework written in Golang)"
+	depends on PACKAGE_golang
+	default y
